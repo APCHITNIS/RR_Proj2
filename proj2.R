@@ -32,7 +32,7 @@ dataMod$PROPEXP[dataMod$PROPDMGEXP == "M"] <- 1e+06
 dataMod$PROPDMG <- dataMod$PROPDMG * dataMod$PROPEXP
 # Convert exponential indicators to actual values and store them in new CROPEXP column
 
-#Find exponential indicators for Property damange  
+#Find exponential indicators for Crop damange  
 unique(dataMod$CROPDMGEXP)
 
 # invalid indicators ? 
@@ -49,7 +49,7 @@ dataMod$CROPEXP[dataMod$CROPDMGEXP == "M"] <- 1e+06
 # Updating  CROPDMG column with actual values
 dataMod$CROPDMG <- dataMod$CROPDMG * dataMod$CROPEXP
 
-#Use SQLDF package prepare dataframes for analysis 
+#load SQLDF package  
 library(sqldf)
 #group records by EVTYPE and order by FATALITIE
 dfFatalalies = sqldf("select EVTYPE, SUM(FATALITIES) as FATALITIES from `dataMod` group by EVTYPE order by FATALITIES desc")
