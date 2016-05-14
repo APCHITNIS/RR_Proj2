@@ -4,27 +4,35 @@ author: "Amit Chitnis"
 date: "May 14, 2016"
 output: html_document
 ---
+### Idetify the events that caused highest fatalities, injuries, property damage and crop damange based on NOAA database
+=======================================================================================================
+================
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+## 1. SYNOPSIS
+Weather is unpredictable, and when it is severe, it can be the cause of much misery. Being able to predict and prevent damage from severe weather events is a challenging task that required detailed study and interpretation of past occurrences. 
+
+The US National Oceanic and Atmospheric Administration (NOAA)'s storm database provides information about a variety of severe weather events like major storms, tornadoes, typhoons and cyclones in the history of the United States. There are specific details about each kind of event, such as time lines and locations, damage, loss of life and property.
+
+This project takes an in-depth look at the details of the database to provide reports on the effect of such severe weather events in an effort to help minimize the resulting destruction.
+
+The report takes a overhead approach to this issue by considering the ten most destructive weather events (in terms of fatalities, injuries, property and material damage) and plotting them on a bar chart. This process helped isolate **tornadoes** as being the most destructive in terms of fatalities and injuries.The **floods** are responsible for the highest property damages and **drought** caused the most crop damages.
+
+## 2. Data Processing
+The data for this assignment come in the form of a comma-separated-value file compressed via the bzip2 algorithm to reduce its size. You can download the file from the course web site:
+
+[Storm Data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2) 
+File Size: 47Mb
+There is also some documentation of the database available. Here you will find how some of the variables are constructed/defined.
+
+National Weather Service Storm Data Documentation
+National Climatic Data Center Storm Events FAQ
+The events in the database start in the year 1950 and end in November 2011. In the earlier years of the database there are generally fewer events recorded, most likely due to a lack of good records. More recent years should be considered more complete.
+
+The simple read.CSV is used to load the data. A copy of the dataframe is made for the analysis purposes.
+```{r}
+data <- read.csv("repdata-data-StormData.csv")
+#Make a copy of dataframe for analysis
+dataMod <- data
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+SQLDF library is used to identify the events with the highest fatalities, injuries, property damage and crop damage. Group by clause within the 
